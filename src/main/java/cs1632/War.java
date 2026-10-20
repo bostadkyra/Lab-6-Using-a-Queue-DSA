@@ -21,5 +21,22 @@ public class War {
             player2.add(deck.nextCard());
         }
         System.out.println("26 cards have been dealt to each player. The game will now begin!\n");
+
+        String result = null;
+
+        while (result == null){
+            if (player1.isEmpty() && player2.isEmpty()){
+                result = "It's a tie! Sometimes there are no winners in War...";
+                break;
+            }
+            if (player1.isEmpty()){
+                result = "Player 2 wins!";
+                break;
+            }
+            if (player2.isEmpty()){
+                result = "Player 1 wins!";
+                break;
+            }
+        }
     }
 }
