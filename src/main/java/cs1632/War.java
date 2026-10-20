@@ -37,6 +37,28 @@ public class War {
                 result = "Player 1 wins!";
                 break;
             }
+
+            //holds the cards that go to each round's winner
+            LinkedList<PlayingCard> winnings = new LinkedList<>();
+
+            rounds++;
+            //Normal round
+            PlayingCard card1 = player1.pop();
+            PlayingCard card2 = player2.pop();
+            winnings.add(card1);
+            winnings.add(card2);
+            System.out.println("Round " + rounds + ": Player 1 plays " + card1.cardName() +
+                    ", Player 2 plays " + card2.cardName());
+
+            if (card1.playingCardValue() > card2.playingCardValue()){
+                player1.addAll(winnings); //addAll used instead of push() so all cards can be added at once to the end
+                System.out.println("Player 1 wins " + winnings.size() + " cards.");
+            } else{
+                player2.addAll(winnings);
+                System.out.println("Player 2 wins " + winnings.size() + " cards.");
+            }
+            System.out.println("*Player 1: " + player1.size() + " cards. | " +
+                    "Player 2: " + player2.size() + " cards.*");
         }
     }
 }
