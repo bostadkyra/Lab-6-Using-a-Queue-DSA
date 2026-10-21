@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class War {
+    private static final int MAX_ROUNDS = 100_000; //prevents games from going past 100,000 rounds
     PlayingCardDeck deck;
     Queue<PlayingCard> player1;
     Queue<PlayingCard> player2;
@@ -36,6 +37,11 @@ public class War {
             }
             if (player2.isEmpty()){
                 result = "Player 1 wins!";
+                break;
+            }
+
+            if (rounds >= MAX_ROUNDS){
+                result = "Game stopped after " + MAX_ROUNDS + " rounds with no winner. It's a draw!";
                 break;
             }
 
