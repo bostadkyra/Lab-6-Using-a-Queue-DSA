@@ -42,7 +42,8 @@ public class War {
             //holds the cards that go to each round's winner
             Queue<PlayingCard> winnings = new LinkedList<>();
 
-            rounds++;
+            rounds++; //rounds is incremented every time two card values
+                        //are drawn and will be compared
             //Normal round
             PlayingCard card1 = player1.poll(); //poll() is like pop() but for Queue types
             PlayingCard card2 = player2.poll();
@@ -74,7 +75,25 @@ public class War {
                     gameOverDuringWar = true;
                     break;
                 }
+
+                //each player takes turns putting 3 cards into the winnings pile
+                for (int i=0; i<3; i++){
+                    winnings.add(player1.poll());
+                    winnings.add(player2.poll());
+                }
+                System.out.println("Each player puts three cards into the winnings pile.");
+
+                rounds++;
+                card1 = player1.poll();
+                card2 = player2.poll();
+                winnings.add(card1);
+                winnings.add(card2);
+                System.out.println("War round " + rounds + ": Player 1 plays " + card1.cardName() +
+                        ", Player 2 plays " + card2.cardName());
             }
+
+            if (gameOverDuringWar) break; //true if either player runs out of cards during war
+
             if (card1.playingCardValue() > card2.playingCardValue()){
                 player1.addAll(winnings); //addAll used instead of push() so all cards can be added at once to the end
                 System.out.println("Player 1 wins " + winnings.size() + " cards.");
@@ -85,5 +104,11 @@ public class War {
             System.out.println("*Player 1: " + player1.size() + " cards. | " +
                     "Player 2: " + player2.size() + " cards.*");
         }
+        //Game Over Results
+        System.out.println("\n**********");
+        System.out.println("GAME OVER");
+        System.out.println(result);
+        System.out.println("Rounds of cards played: " + rounds);
+        System.out.println("**********");
     }
 }
